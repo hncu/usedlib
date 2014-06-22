@@ -1,4 +1,5 @@
-github hncu add usedlib
-tortoisgit clone usedlib
+github hncu add usedlib 
+
+tortoisgit clone usedlib use ssh
 
 ggts new project
