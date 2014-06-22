@@ -3,3 +3,15 @@ github hncu add usedlib
 tortoisgit clone usedlib use ssh
 
 ggts new project
+
+bootstrap.groovy plugin add :compile ":shiro:1.2.1"
+grails compile
+
+grails shiro-quick-start //--prefix== error,why?
+result:
+ Created file grails-app/domain/ShiroUser.groovy
+ Created file grails-app/domain/ShiroRole.groovy
+ Created file grails-app/realms/ShiroDbRealm.groovy
+ Created file grails-app/controllers/AuthController.groovy
+ Created file grails-app/views/auth/login.gsp
+ Created file grails-app/conf/ShiroSecurityFilters.groovy
