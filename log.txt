@@ -1,0 +1,4 @@
+github hncu add usedlib
+tortoisgit clone usedlib
+
+ggts new project
