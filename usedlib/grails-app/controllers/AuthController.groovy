@@ -74,6 +74,7 @@ class AuthController {
     }
 
     def unauthorized = {
-        render "You do not have permission to access this page."
+        flash.message= "You do not have permission to access this page.please login with other username"
+		redirect(action: "login")
     }
 }

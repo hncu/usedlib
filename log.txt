@@ -15,3 +15,4 @@ result:
  Created file grails-app/controllers/AuthController.groovy
  Created file grails-app/views/auth/login.gsp
  Created file grails-app/conf/ShiroSecurityFilters.groovy
+
