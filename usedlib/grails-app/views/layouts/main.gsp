@@ -13,15 +13,33 @@
 		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<r:require modules="bootstrap"/>
+		<style type="text/css">
+	      body {
+	        padding-top: 60px;
+	        padding-bottom: 40px;
+	      }
+	      </style>
 		<g:layoutHead/>
 		<g:javascript library="application"/>		
 		<r:layoutResources />
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
-		<g:layoutBody/>
+		<!-- <div id="grailsLogo" role="banner"><a href="http://#"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div> -->
+		<g:render template="/layouts/header"/>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10"><g:layoutBody/></div>
+				<div class="col-md-2"><img src="${resource(dir: 'images', file: 'sidebar-tempfortest.png')}" alt="sidebar"/></div>
+			</div>			
+			<g:render template="/layouts/footer"/>
+		</div>
+		
+		
+		<!-- 
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+		 -->
 		<r:layoutResources />
 	</body>
 </html>
