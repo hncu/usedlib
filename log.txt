@@ -16,3 +16,4 @@ result:
  Created file grails-app/views/auth/login.gsp
  Created file grails-app/conf/ShiroSecurityFilters.groovy
 
+grails install-templates 创建模板文件，通过将bootstrap文件内容修改到模板文件中，从而快速生成所有index，list，view等文件，减少手动修改量。
