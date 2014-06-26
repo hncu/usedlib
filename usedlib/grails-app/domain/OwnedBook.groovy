@@ -1,0 +1,7 @@
+
+
+class OwnedBook {
+
+    static constraints = {
+    }
+}

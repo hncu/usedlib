@@ -1,0 +1,6 @@
+
+
+class MessagesController {
+
+    def index() { }
+}

@@ -1,0 +1,6 @@
+
+
+class OwnedBookController {
+
+    def index() { }
+}

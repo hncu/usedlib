@@ -1,0 +1,6 @@
+
+
+class ReadStatusController {
+
+    def index() { }
+}
