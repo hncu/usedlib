@@ -1,0 +1,7 @@
+
+
+class Friends {
+
+    static constraints = {
+    }
+}
