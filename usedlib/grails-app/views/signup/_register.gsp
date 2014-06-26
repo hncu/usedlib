@@ -1,21 +1,16 @@
 <%@ page import="ShiroUser" %>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
-    <label for="username">
-        <g:message code="user.username.label" default="Username" />
-        <span class="required-indicator">*</span>
-    </label>
-    <g:textField name="username" required="" value="${userInstance?.username}"/>
-</div>
+<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+    <g:textField class="form-control" name="username"  id="username" type="text" placeholder="邮件/手机" required="" value="${userInstance?.username}"/>
+</div><br/>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'passwordHash', 'error')} required">
-    <label for="password">Password</label>
-    <span class="required-indicator">*</span>
-    <g:passwordField name="password" value=""/>
-</div>
+<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'passwordHash', 'error')} required">
+    <span class="input-group-addon" for="password"><i class="glyphicon glyphicon-italic"></i></span> 
+    <g:passwordField  class="form-control" name="password" id="password" type="text" placeholder="密码" required="" value=""/>
+</div><br/>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'passwordHash', 'error')} required">
-    <label for="password">Confirm Password</label>
-    <span class="required-indicator">*</span>
-    <g:passwordField name="password2" value=""/>
-</div>
+<div class="input-group fieldcontain ${hasErrors(bean: userInstance, field: 'passwordHash', 'error')} required">
+   <span class="input-group-addon" for="password2"><i class="glyphicon glyphicon-italic"></i></span> 
+    <g:passwordField class="form-control" name="password2" id="password2" type="text" placeholder="重复密码" required="" value=""/>
+</div><br/>
