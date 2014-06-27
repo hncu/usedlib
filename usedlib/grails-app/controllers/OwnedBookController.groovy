@@ -2,5 +2,5 @@
 
 class OwnedBookController {
 
-    def index() { }
+    def scaffold=true
 }

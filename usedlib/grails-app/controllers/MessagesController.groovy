@@ -2,5 +2,5 @@
 
 class MessagesController {
 
-    def index() { }
+    def scaffold=true
 }

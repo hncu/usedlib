@@ -2,5 +2,5 @@
 
 class ReadStatusController {
 
-    def index() { }
+    def scaffold=true
 }
