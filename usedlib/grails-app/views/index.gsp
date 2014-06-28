@@ -98,6 +98,24 @@
 			</div>
 			
 		</div>
+<!-- for searchbook -->
+			<g:hasErrors bean="${bookInstance}">
+			<ul class="errors" role="alert">
+				<g:eachError bean="${bookInstance}" var="error">
+				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+				</g:eachError>
+			</ul>
+			</g:hasErrors>
+			<g:form class="form-horizontal" url="[resource:bookInstance, controller:'book',action:'searchBook']" >
+				<fieldset class="form">
+					<div class="form-group">
+					    <g:textField name="isbn13" required="" value="请输入ISBN号或者书名"/>
+					</div>
+				</fieldset>
+				<fieldset class="buttons">
+					<g:submitButton name="searchBook" class="btn btn-primary" value="搜索" />
+				</fieldset>
+			</g:form>
 		
 <div id="controller-list" role="navigation">
 				<h2>Available Controllers:</h2>
