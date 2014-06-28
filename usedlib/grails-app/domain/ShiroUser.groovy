@@ -4,6 +4,8 @@ class ShiroUser {
 	String email
 	Profile profile
 	String huoyuedu//最近活跃的人的图书优先推荐
+	String loginCount
+	String deleted
 	
     static hasMany = [roles: ShiroRole, permissions: String,
 					  borrowedBookOwner:BorrowedBook,own:OwnedBook,
@@ -16,5 +18,7 @@ class ShiroUser {
 		email(nullable:true,blank:false,unique:true,email: true)
 		profile(nullable:true,blank:false)
 		huoyuedu(nullable: true, blank: false)
+		loginCount(nullable: true, blank: false)
+		deleted(nullable: true, blank: false)
     }
 }
