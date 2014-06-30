@@ -1,6 +1,7 @@
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-
+import com.alibaba.fastjson.JSON
+import com.alibaba.fastjson.JSONObject
 
 @Transactional(readOnly = true)
 class BookController {
@@ -42,6 +43,50 @@ class BookController {
             '*' { respond bookInstance, [status: CREATED] }
         }
     }
+	
+	@Transactional
+	def searchBook() {
+		//后面添加/v2/book/search 搜索功能。
+		//println params.isbn13
+		String url='https://api.douban.com/v2/book/isbn/:'+params.isbn13					
+		//String doubanString= 'https://api.douban.com/v2/book/1220562'.toURL().text
+		String doubanString
+		try{
+			doubanString=url.toURL().text			
+		}catch(FileNotFoundException e){e.printStackTrace() }
+		
+		
+		//BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream('F:\\GitHubWorkspace\\for usedlib\\douban-utf-8.json'),"UTF-8"));
+		//String doubanString =  br.readLine();
+		//println "\n"+doubanString
+		//br.close();		
+		//doubanString= doubanString.substring(5,doubanString.size())
+		//println "||||||||||***********||||||||||\n"
+		//println doubanString
+		if(doubanString==null){
+			println "error doubanString null"
+			redirect(uri: "/book/index")
+			return}
+		JSONObject json = JSON.parseObject(doubanString)
+		def bookInstance1 = Book.findByIsbn13(json.isbn13)
+		//println bookInstance1
+		if(bookInstance1==null){	
+			bookInstance1= new Book()
+			bookInstance1.isbn13= json.isbn13
+			bookInstance1.title= json.title
+	
+			if (bookInstance1.hasErrors()) {
+				respond bookInstance1.errors, view:'create'
+				return
+			}
+			
+			bookInstance1.save flush:true
+		}
+		
+		redirect( action: "show", method: "GET",params:['id':bookInstance1.id])
+		
+	}
+	
 	def edit(Book bookInstance) {
         respond bookInstance
     }
