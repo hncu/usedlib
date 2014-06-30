@@ -9,6 +9,6 @@ class OwnedBook {
     static constraints = {
 		book(nullable:false, blank:false)
 		user(nullable:false, blank:false)
-		dateCreated(nullable:false, blank:false)
+		dateCreated(nullable:true, blank:false)//添加用户id&&书id一致的约束。
     }
 }

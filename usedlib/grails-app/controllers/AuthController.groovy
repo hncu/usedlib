@@ -37,7 +37,10 @@ class AuthController {
             // will be thrown if the username is unrecognised or the
             // password is incorrect.
             SecurityUtils.subject.login(authToken)
-
+			def user=ShiroUser.findByUsername(params.username)
+			if(user){
+				session.ShiroUserId=user.id
+			}
             log.info "Redirecting to '${targetUri}'."
             redirect(uri: targetUri)
         }

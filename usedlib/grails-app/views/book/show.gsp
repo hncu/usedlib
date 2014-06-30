@@ -128,10 +128,18 @@
 				</g:if>
 			
 			</ol>
-			<g:form url="[resource:bookInstance, action:'delete']" method="DELETE">
+ 			<g:form url="[resource:bookInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="col-sm-offset-2 btn btn-primary edit" action="edit" resource="${bookInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="btn btn-default delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				</fieldset>
+			</g:form> 
+
+			<g:form class="form-horizontal" url="[controller:'ownedBook',action:'save']" >
+				<g:hiddenField name= "book.id" value =" ${bookInstance.id}"  />
+                <g:hiddenField name= "user.id" value =" ${session.ShiroUserId} " />                		
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="col-sm-offset-2 btn btn-primary save" value="将此书添加到我的书库" />
 				</fieldset>
 			</g:form>
 		</div>
