@@ -6,6 +6,8 @@ class OwnedBook {
 	static belongsTo=ShiroUser
 	Date dateCreated
 	
+	String toString(){book.title}
+	
     static constraints = {
 		book(nullable:false, blank:false)
 		user(nullable:false, blank:false)

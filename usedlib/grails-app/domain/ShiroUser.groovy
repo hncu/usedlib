@@ -7,6 +7,8 @@ class ShiroUser {
 	String loginCount
 	String deleted
 	
+	String toString(){	username	}
+	
     static hasMany = [roles: ShiroRole, permissions: String,
 					  borrowedBookOwner:BorrowedBook,own:OwnedBook,
 					  sendMessages:Messages,readStatuses:ReadStatus,friends:Friends]

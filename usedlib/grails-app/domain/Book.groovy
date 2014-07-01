@@ -10,6 +10,8 @@ class Book {
 	String imageUrl
 	String tags
 	
+	String toString(){	title	}
+	
     static constraints = {
 		title(nullable:false, blank:false,  unique:false)
 		isbn13(nullable:false, blank:false, unique:false)
