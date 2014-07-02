@@ -26,16 +26,13 @@
 						<tr>
 						
 							<g:sortableColumn property="username" title="${message(code: 'shiroUser.username.label', default: 'Username')}" />
-						
-							<g:sortableColumn property="passwordHash" title="${message(code: 'shiroUser.passwordHash.label', default: 'Password Hash')}" />
-						
+				
 							<g:sortableColumn property="email" title="${message(code: 'shiroUser.email.label', default: 'Email')}" />
 						
 							<th><g:message code="shiroUser.profile.label" default="Profile" /></th>
 						
 							<g:sortableColumn property="huoyuedu" title="${message(code: 'shiroUser.huoyuedu.label', default: 'Huoyuedu')}" />
 						
-							<g:sortableColumn property="loginCount" title="${message(code: 'shiroUser.loginCount.label', default: 'Login Count')}" />
 						
 						</tr>
 					</thead>
@@ -45,15 +42,20 @@
 						
 							<td><g:link action="show" id="${shiroUserInstance.id}">${fieldValue(bean: shiroUserInstance, field: "username")}</g:link></td>
 						
-							<td>${fieldValue(bean: shiroUserInstance, field: "passwordHash")}</td>
-						
 							<td>${fieldValue(bean: shiroUserInstance, field: "email")}</td>
 						
 							<td>${fieldValue(bean: shiroUserInstance, field: "profile")}</td>
 						
 							<td>${fieldValue(bean: shiroUserInstance, field: "huoyuedu")}</td>
-						
-							<td>${fieldValue(bean: shiroUserInstance, field: "loginCount")}</td>
+							<td>
+			<g:form class="form-horizontal" url="[controller:'friends', action:'save']" >
+				<g:hiddenField name= "friend.id" value =" ${shiroUserInstance.id} " />				
+				<g:hiddenField name= "user.id" value =" ${session.ShiroUserId} " />
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="btn btn-primary save" value="加为好友" />
+				</fieldset>
+			</g:form>
+							</td>
 						
 						</tr>
 					</g:each>
