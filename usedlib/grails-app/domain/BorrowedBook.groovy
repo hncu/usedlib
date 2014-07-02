@@ -13,5 +13,8 @@ class BorrowedBook {
 		owner(nullable:false,blank:true)
 		borrower(nullable:false,blank:true)
 		book(nullable:false,blank:true)
+		borrowStatus(nullable:true,blank:true)
+		dateCreated(nullable:true,blank:true)
+		dateBack(nullable:true,blank:true)
     }
 }
