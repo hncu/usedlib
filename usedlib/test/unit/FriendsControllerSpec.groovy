@@ -3,9 +3,9 @@
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(ShiroUserController)
-@Mock(ShiroUser)
-class ShiroUserControllerSpec extends Specification {
+@TestFor(FriendsController)
+@Mock(Friends)
+class FriendsControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -19,8 +19,8 @@ class ShiroUserControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.shiroUserInstanceList
-            model.shiroUserInstanceCount == 0
+            !model.friendsInstanceList
+            model.friendsInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -28,32 +28,32 @@ class ShiroUserControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.shiroUserInstance!= null
+            model.friendsInstance!= null
     }
 
     void "Test the save action correctly persists an instance"() {
 
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
-            def shiroUser = new ShiroUser()
-            shiroUser.validate()
-            controller.save(shiroUser)
+            def friends = new Friends()
+            friends.validate()
+            controller.save(friends)
 
         then:"The create view is rendered again with the correct model"
-            model.shiroUserInstance!= null
+            model.friendsInstance!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            shiroUser = new ShiroUser(params)
+            friends = new Friends(params)
 
-            controller.save(shiroUser)
+            controller.save(friends)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/shiroUser/show/1'
+            response.redirectedUrl == '/friends/show/1'
             controller.flash.message != null
-            ShiroUser.count() == 1
+            Friends.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -65,11 +65,11 @@ class ShiroUserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def shiroUser = new ShiroUser(params)
-            controller.show(shiroUser)
+            def friends = new Friends(params)
+            controller.show(friends)
 
         then:"A model is populated containing the domain instance"
-            model.shiroUserInstance == shiroUser
+            model.friendsInstance == friends
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -81,11 +81,11 @@ class ShiroUserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def shiroUser = new ShiroUser(params)
-            controller.edit(shiroUser)
+            def friends = new Friends(params)
+            controller.edit(friends)
 
         then:"A model is populated containing the domain instance"
-            model.shiroUserInstance == shiroUser
+            model.friendsInstance == friends
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -94,28 +94,28 @@ class ShiroUserControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/shiroUser/index'
+            response.redirectedUrl == '/friends/index'
             flash.message != null
 
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def shiroUser = new ShiroUser()
-            shiroUser.validate()
-            controller.update(shiroUser)
+            def friends = new Friends()
+            friends.validate()
+            controller.update(friends)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.shiroUserInstance == shiroUser
+            model.friendsInstance == friends
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            shiroUser = new ShiroUser(params).save(flush: true)
-            controller.update(shiroUser)
+            friends = new Friends(params).save(flush: true)
+            controller.update(friends)
 
         then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/shiroUser/show/$shiroUser.id"
+            response.redirectedUrl == "/friends/show/$friends.id"
             flash.message != null
     }
 
@@ -125,23 +125,23 @@ class ShiroUserControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/shiroUser/index'
+            response.redirectedUrl == '/friends/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def shiroUser = new ShiroUser(params).save(flush: true)
+            def friends = new Friends(params).save(flush: true)
 
         then:"It exists"
-            ShiroUser.count() == 1
+            Friends.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(shiroUser)
+            controller.delete(friends)
 
         then:"The instance is deleted"
-            ShiroUser.count() == 0
-            response.redirectedUrl == '/shiroUser/index'
+            Friends.count() == 0
+            response.redirectedUrl == '/friends/index'
             flash.message != null
     }
 }
