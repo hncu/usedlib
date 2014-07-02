@@ -143,14 +143,43 @@
 				</fieldset>
 			</g:form>
 			
+<!-- borrowedbook -->
+      <div id="list-ownedBook" class="content scaffold-list" role="main">
+			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<g:if test="${flash.message}">
+				<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<div class="table">
+				<table class="table table-striped">
+				<thead>
+						<tr>						
+							<th><g:message code="ownedBook.user.label" default="User" /></th>
+						</tr>
+					</thead>
+					<tbody>
+					<g:each in="${bookOwnerList}" status="i" var="bookOwnerInstance">
+						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							<td>${fieldValue(bean: bookOwnerInstance, field: "username")}</td>
+							<td>
 			<g:form class="form-horizontal" url="[controller:'borrowedBook',action:'save']" >
 				<g:hiddenField name= "book.id" value =" ${bookInstance.id}"  />
-				<g:hiddenField name= "owner.id" value ="3"  />
-                <g:hiddenField name= "borrower.id" value =" ${session.ShiroUserId} " />                		
+                <g:hiddenField name= "borrower.id" value =" ${session.ShiroUserId} " />   							
+						<g:hiddenField name= "owner.id" value ="${bookOwnerInstance.id}"/>  
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="col-sm-offset-2 btn btn-primary save" value="借阅此书" />
 				</fieldset>
 			</g:form>
+							</td>						
+						</tr>
+					</g:each>
+					</tbody>
+				</table>
+			</div>
+				<div class="pagination">
+					<g:paginate total="${bookOwnerListInstanceCount ?: 0}" />
+				</div>
+		</div>
+   
 			
 		</div>
 	</body>
