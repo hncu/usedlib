@@ -9,6 +9,8 @@ class BorrowedBook {
 	Date dateCreated
 	Date dateBack
 	
+	String toString(){	borrower.toString()+" lend "+owner.toString()+"'s book:"+book.toString()+""}
+	
     static constraints = {
 		owner(nullable:false,blank:true)
 		borrower(nullable:false,blank:true)
