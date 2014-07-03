@@ -1,3 +1,4 @@
+import org.apache.shiro.SecurityUtils
 
 
 import static org.springframework.http.HttpStatus.*
@@ -10,7 +11,17 @@ class OwnedBookController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond OwnedBook.list(params), model:[ownedBookInstanceCount: OwnedBook.count()]
+		def ownedbooklist
+		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
+			println "ROLE_ADMIN"
+			ownedbooklist=OwnedBook.list(params)
+		}else{
+			println "ROLE_USER"
+			def user=ShiroUser.findById(session .ShiroUserId)
+			ownedbooklist=OwnedBook.findAllByUser(user)
+		}
+		
+        respond ownedbooklist, model:[ownedBookInstanceCount: OwnedBook.count()]
     }
 
     def show(OwnedBook ownedBookInstance) {
