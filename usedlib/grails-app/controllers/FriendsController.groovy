@@ -1,7 +1,6 @@
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.apache.shiro.SecurityUtils
 
 @Transactional(readOnly = true)
 class FriendsController {
@@ -10,7 +9,14 @@ class FriendsController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Friends.list(params), model:[friendsInstanceCount: Friends.count()]
+		def friendslist
+		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
+			friendslist=Friends.list(params)
+		}else{
+			def user=ShiroUser.findById(session .ShiroUserId)
+			friendslist=Friends.findAllByUser(user)
+		}
+        respond friendslist, model:[friendsInstanceCount: Friends.count()]
     }
 
     def show(Friends friendsInstance) {

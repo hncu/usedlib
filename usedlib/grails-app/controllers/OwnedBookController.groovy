@@ -1,8 +1,6 @@
-import org.apache.shiro.SecurityUtils
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.apache.shiro.SecurityUtils
 
 @Transactional(readOnly = true)
 class OwnedBookController {
@@ -13,10 +11,8 @@ class OwnedBookController {
         params.max = Math.min(max ?: 10, 100)
 		def ownedbooklist
 		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
-			println "ROLE_ADMIN"
 			ownedbooklist=OwnedBook.list(params)
 		}else{
-			println "ROLE_USER"
 			def user=ShiroUser.findById(session .ShiroUserId)
 			ownedbooklist=OwnedBook.findAllByUser(user)
 		}
