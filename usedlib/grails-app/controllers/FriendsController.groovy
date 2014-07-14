@@ -13,7 +13,7 @@ class FriendsController {
 		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
 			friendslist=Friends.list(params)
 		}else{
-			def user=ShiroUser.findById(session .ShiroUserId)
+			def user=ShiroUser.findById(session .ShiroUser?.id)
 			friendslist=Friends.findAllByUser(user)
 		}
         respond friendslist, model:[friendsInstanceCount: Friends.count()]

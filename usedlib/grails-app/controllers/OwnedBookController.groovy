@@ -13,7 +13,7 @@ class OwnedBookController {
 		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
 			ownedbooklist=OwnedBook.list(params)
 		}else{
-			def user=ShiroUser.findById(session .ShiroUserId)
+			def user=ShiroUser.findById(session .ShiroUser?.id)
 			ownedbooklist=OwnedBook.findAllByUser(user)
 		}
 		

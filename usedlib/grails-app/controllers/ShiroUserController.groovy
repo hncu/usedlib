@@ -10,7 +10,7 @@ class ShiroUserController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
 	def userindex(){
-		def user=ShiroUser.findById(session .ShiroUserId)
+		def user=ShiroUser.findById(session .ShiroUser?.id)
 		def friendsList=Friends.findAllByUser(user,[max:3,sort:'id', order:'desc'])
 		def borrowedBookList=BorrowedBook.findAllByBorrower(user)
 		def lendedBookList=BorrowedBook.findAllByOwner(user,[max:3,sort:'id', order:'desc'])

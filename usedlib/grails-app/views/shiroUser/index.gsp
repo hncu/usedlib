@@ -50,7 +50,7 @@
 							<td>
 			<g:form class="form-horizontal" url="[controller:'friends', action:'save']" >
 				<g:hiddenField name= "friend.id" value =" ${shiroUserInstance.id} " />				
-				<g:hiddenField name= "user.id" value =" ${session.ShiroUserId} " />
+				<g:hiddenField name= "user.id" value =" ${session.ShiroUser.id} " />
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="btn btn-primary save" value="加为好友" />
 				</fieldset>
