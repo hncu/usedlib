@@ -25,6 +25,7 @@ class ShiroSecurityFilters {
 		//[controller: 'internalMessage', action: '*', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		//[controller: 'own', action: '*', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		//[controller: 'borrow', action: '*', roles: ['ROLE_ADMIN', 'ROLE_USER']],
+		[controller: 'shiroUser', action: 'userindex', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		[controller: 'shiroUser', action: 'index', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		[controller: 'shiroUser', action: '*', roles: ['ROLE_ADMIN']]
 		

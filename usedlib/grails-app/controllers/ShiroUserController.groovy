@@ -2,11 +2,22 @@
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.apache.shiro.SecurityUtils
 
 @Transactional(readOnly = true)
 class ShiroUserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def userindex(){
+		def user=ShiroUser.findById(session .ShiroUserId)
+		def friendsList=Friends.findAllByUser(user,[max:3,sort:'id', order:'desc'])
+		def borrowedBookList=BorrowedBook.findAllByBorrower(user)
+		def lendedBookList=BorrowedBook.findAllByOwner(user,[max:3,sort:'id', order:'desc'])
+		def ownedbooklist=OwnedBook.findAllByUser(user)		
+		return [friendsInstanceList:friendsList,borrowedBookInstanceList:borrowedBookList,
+			    lendedBookInstanceList:lendedBookList,ownedBookInstanceList:ownedbooklist]
+	}
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

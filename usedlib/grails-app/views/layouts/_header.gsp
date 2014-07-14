@@ -12,7 +12,7 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/usedlib/">主页</a></li>
+				<li class="active"><a href="/usedlib/shiroUser/userindex">个人主页</a></li>
 				<li><a href="">本地图书</a></li>
 				<li><a href="">朋友圈</a></li>
 				<li><a href="#about">关于</a></li>
