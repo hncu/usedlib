@@ -29,9 +29,10 @@
 		
 		<div class="container">
 			<div class="row">
-				<div class="col-md-10"><g:layoutBody/></div>
-				<g:render template="/layouts/sidebar"/>
-				<div class="col-md-2"><img src="${resource(dir: 'images', file: 'sidebar-tempfortest.png')}" alt="sidebar"/>
+				<div class="col-md-10"><g:layoutBody/></div>				
+				<div class="col-md-2">
+					<img src="${resource(dir: 'images', file: 'default_avatar.jpg')}" alt="sidebar"/>
+					<g:render template="/layouts/sidebar"/>
 				</div>
 			</div>			
 			<g:render template="/layouts/footer"/>

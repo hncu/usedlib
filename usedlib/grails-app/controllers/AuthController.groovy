@@ -23,7 +23,7 @@ class AuthController {
         
         // If a controller redirected to this page, redirect back
         // to it. Otherwise redirect to the root URI.
-        def targetUri = params.targetUri ?: "/book/index"
+        def targetUri = params.targetUri ?: "/shiroUser/userindex"
         
         // Handle requests saved by Shiro filters.
         SavedRequest savedRequest = WebUtils.getSavedRequest(request)

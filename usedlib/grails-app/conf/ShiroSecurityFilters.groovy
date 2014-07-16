@@ -12,6 +12,8 @@ class ShiroSecurityFilters {
 	static nonAuthenticatedActions = [
 		//[controller: 'book', action: '*'],
 		[controller: 'auth', action: '*'],
+		[controller: 'book', action: 'index'],
+		[controller: 'shiroUser', action: 'index'],
 		//[controller: 'signup', action: '*']
 	]
 	

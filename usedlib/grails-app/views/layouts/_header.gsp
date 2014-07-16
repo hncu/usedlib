@@ -12,9 +12,15 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/usedlib/shiroUser/userindex">个人主页</a></li>
-				<li><a href="">本地图书</a></li>
-				<li><a href="">朋友圈</a></li>
+				<g:if test="${params.controller=="shiroUser"&&params.action=="userindex"}"><li class="active"></g:if>
+				<g:else><li></g:else>
+					<a href="/usedlib/shiroUser/userindex">个人主页</a></li>
+				<g:if test="${params.controller=="book"&&params.action=="index"}"><li class="active"></g:if>
+				<g:else><li></g:else>
+					<a href="/usedlib/book/index">附近图书</a></li>
+				<g:if test="${params.controller=="shiroUser"&&params.action=="index"}"><li class="active"></g:if>
+				<g:else><li></g:else>
+					<a href="/usedlib/shiroUser/index">以书会友</a></li>
 				<li><a href="#about">关于</a></li>
 				<li><a href="#contact">联系我们</a></li>
 			</ul>
@@ -22,7 +28,7 @@
 				<shiro:isLoggedIn>
 					<li><a class=""  href="/usedlib/messages/index"><i class="glyphicon glyphicon-envelope"></i> 站内信</a></li>
 					<li class="dropdown">
-						<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> ${session.ShiroUser}<span class="caret"></span></a>
+						<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  ${session.ShiroUser} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 			                <li><a href="/usedlib/messages/index"><i class="glyphicon glyphicon-envelope"></i> 我的消息</a></li>
 			                <li><a href="/usedlib/friends/index"><i class="glyphicon glyphicon-th-large"></i> 我的好友</a></li>
@@ -31,9 +37,8 @@
 			                <li><a href="/usedlib/borrowedBook/index"><i class="glyphicon glyphicon-indent-right"></i> 借入图书</a></li>
 			                <li><a href="/usedlib/borrowedBook/index"><i class="glyphicon glyphicon-indent-left"></i> 借出图书</a></li>
 			                <li class="divider"></li>
-			                <li><a href="/usedlib/profile/edit"><i class="glyphicon glyphicon-cog"></i> 修改个人资料</a></li>
-			                <li><a href="#">One more separated link</a></li>
-			                <li><a href="/usedlib/auth/signOut"><i class="glyphicon glyphicon-off"></i>退出</a></li>
+			                <li><a href="/usedlib/profile/edit/${session.ShiroUser.id}"><i class="glyphicon glyphicon-cog"></i> 修改个人资料</a></li>
+			                <li><a href="/usedlib/auth/signOut"><i class="glyphicon glyphicon-off"></i> 退出</a></li>
 			             </ul>
 		             </li>
 				</shiro:isLoggedIn>				
