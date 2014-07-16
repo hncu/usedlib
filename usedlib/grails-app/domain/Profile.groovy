@@ -4,9 +4,9 @@ class Profile {
 	String sAvatar
 	String realname
 	String gpsLongitude//经度
-	String Latitude//纬度	
+	String gpsLatitude//纬度	
 	String province
-	String city 
+	String city
 	String dist //区
 	String community //社区
 	String suite    //楼房号,不向其他人显示，仅作为推荐使用。

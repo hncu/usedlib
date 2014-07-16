@@ -40,7 +40,9 @@ class AuthController {
 			def user=ShiroUser.findByUsername(params.username)
 			if(user){
 				session.ShiroUser=user
-				//session.ShiroUserId=user.id
+				session.OwnedBookCount=OwnedBook.findAllByUser(user).size()
+				session.borrowedBookCount=BorrowedBook.findAllByBorrower(user).size()
+				session.lendedBookCount=BorrowedBook.findAllByOwner(user).size()
 			}
             log.info "Redirecting to '${targetUri}'."
             redirect(uri: targetUri)
