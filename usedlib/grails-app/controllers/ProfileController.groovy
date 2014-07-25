@@ -1,19 +1,19 @@
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class ProfileController {
-
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 	
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	def hdImageService
 	def avatar(){
 		
 	}
 	
 	def avatarshow(){
 		def uploadedFile = request.getFile('payload')
+		
 		if(!uploadedFile.empty){
 		  //println "Class: ${uploadedFile.class}"
 		  //println "Name: ${uploadedFile.name}"
@@ -22,16 +22,21 @@ class ProfileController {
 		  //println "ContentType: ${uploadedFile.contentType}"
 		  
 		  def webRootDir = servletContext.getRealPath("/")
-		  println "webRootDir"+webRootDir
+		  //println "webRootDir"+webRootDir
 		  def userDir = new File(webRootDir, "/images/avatar/")
-		  userDir.mkdirs()
-		  String filenam=uploadedFile.originalFilename
-		  String fileEx = filenam.substring(filenam.indexOf("."),filenam.length());
-		  uploadedFile.transferTo( new File( userDir,session.ShiroUser.id.toString()+fileEx))
+		  if(!userDir.exists()){
+			  userDir.mkdirs()
+		  }
+		  String filename=uploadedFile.originalFilename
+		  String fileEx = filename.substring(filename.indexOf("."),filename.length());
+		  
 		  def profi=Profile.findById(session.ShiroUser.id)
 		  profi.bAvatar=session.ShiroUser.id.toString()+fileEx//userDir.toString()+"\\"+
-		  //println profi.toString()+profi.bAvatar
 		  
+		  FileOutputStream fos=new FileOutputStream(userDir.toString()+"\\"+profi.bAvatar)
+		  fos.write(hdImageService.scale(uploadedFile.getInputStream(), 100, 100))
+		  fos.close()
+		  //uploadedFile.transferTo( new File( userDir,session.ShiroUser.id.toString()+fileEx))
 		  
 		}
 	}

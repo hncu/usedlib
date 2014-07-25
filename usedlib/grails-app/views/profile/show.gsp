@@ -8,6 +8,25 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
+<!-- sidebar -->
+<div class="tabbable">  
+    <ul class="col-md-2 well nav nav-pills nav-stacked">  
+        <li class="active"><a href="#1" data-toggle="tab">基本资料</a></li>  
+        <li><a href="#tt" data-toggle="tab">我的头像</a></li>  
+        <li><a href="#3" data-toggle="tab">我的地图</a></li>
+        <li><a href="#3" data-toggle="tab">详细资料</a></li>
+    </ul>  
+    <div class="tab-content">  
+        <div class="tab-pane active" id="1">  
+        alkjhfalksjdlkfajsl  
+        </div>  
+        <div id="tt" class="tab-pane">  
+            wolaiye  
+        </div>  
+    </div>  
+</div>
+<!-- sidebar -->
+<!-- 	
 		<a href="#show-profile" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -15,8 +34,8 @@
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
-		</div>
-		<div id="show-profile" class="well content scaffold-show" role="main">
+		</div> -->
+		<div id="show-profile" class="well col-md-10 content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

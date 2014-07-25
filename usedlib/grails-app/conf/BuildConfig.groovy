@@ -59,8 +59,8 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.0.2"
         compile ':cache:1.1.1'
-				compile ":shiro:1.2.1"
-				
+		compile ":shiro:1.2.1"
+		compile ":hd-image-utils:1.0"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.9" // or ":hibernate4:4.3.4"
         runtime ":database-migration:1.3.8"
