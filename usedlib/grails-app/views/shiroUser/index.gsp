@@ -28,7 +28,11 @@
 							<g:sortableColumn property="username" title="${message(code: 'shiroUser.username.label', default: 'Username')}" />
 				
 							<g:sortableColumn property="email" title="${message(code: 'shiroUser.email.label', default: 'Email')}" />
-						
+							
+							<g:sortableColumn property="gpsLongitude" title="${message(code: 'shiroUser.gpsLongitude.label', default: 'gpsLongitude')}" />
+							
+							<g:sortableColumn property="gpsLatitude" title="${message(code: 'shiroUser.gpsLatitude.label', default: 'gpsLatitude')}" />
+
 							<th><g:message code="shiroUser.profile.label" default="Profile" /></th>
 						
 							<g:sortableColumn property="huoyuedu" title="${message(code: 'shiroUser.huoyuedu.label', default: 'Huoyuedu')}" />
@@ -43,7 +47,11 @@
 							<td><g:link action="show" id="${shiroUserInstance.id}">${fieldValue(bean: shiroUserInstance, field: "username")}</g:link></td>
 						
 							<td>${fieldValue(bean: shiroUserInstance, field: "email")}</td>
+							
+							<td>${fieldValue(bean: shiroUserInstance, field: "gpsLongitude")}</td>
 						
+							<td>${fieldValue(bean: shiroUserInstance, field: "gpsLatitude")}</td>
+							
 							<td>${fieldValue(bean: shiroUserInstance, field: "profile")}</td>
 						
 							<td>${fieldValue(bean: shiroUserInstance, field: "huoyuedu")}</td>
