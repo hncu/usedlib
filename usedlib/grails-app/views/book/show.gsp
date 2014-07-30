@@ -137,7 +137,7 @@
 
 			<g:form class="form-horizontal" url="[controller:'ownedBook',action:'save']" >
 				<g:hiddenField name= "book.id" value =" ${bookInstance.id}"  />
-                <g:hiddenField name= "user.id" value =" ${session.ShiroUser.id} " />                		
+                <g:hiddenField name= "user.id" value =" ${session.ShiroUser?.id} " />                		
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="col-sm-offset-2 btn btn-primary save" value="将此书添加到我的书库" />
 				</fieldset>
@@ -163,7 +163,7 @@
 							<td>
 			<g:form class="form-horizontal" url="[controller:'borrowedBook',action:'save']" >
 				<g:hiddenField name= "book.id" value =" ${bookInstance.id}"  />
-                <g:hiddenField name= "borrower.id" value =" ${session.ShiroUser.id} " />   							
+                <g:hiddenField name= "borrower.id" value =" ${session.ShiroUser?.id} " />   							
 						<g:hiddenField name= "owner.id" value ="${bookOwnerInstance.id}"/>  
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="col-sm-offset-2 btn btn-primary save" value="借阅此书" />

@@ -10,7 +10,46 @@ class BookController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Book.list(params), model:[bookInstanceCount: Book.count()]
+		//def nearbyUser= ShiroUser.findAllByGpsLongitudeBetweenAndGpsLatitudeBetween(112.41,112.45,28.547,28.548)
+		//print "findByGpsLongitudeBetween:"+nearbyUser
+		
+		def c = ShiroUser.createCriteria()
+		def nearbyUser = c {
+			between("gpsLongitude", (double)112.41,(double)112.45)
+			and {
+				between("gpsLatitude", (double)28.547,(double)28.548)
+			}
+			maxResults(10)
+			order("gpsLongitude", "desc")
+		}
+		println "nearbyUser"+nearbyUser
+
+		Iterator iteratorUser = nearbyUser.iterator();
+		def books=[]
+		def bookOwner=[:]
+		while(iteratorUser.hasNext()) {
+			def ownedBookbyuser=OwnedBook.findAllByUser(iteratorUser.next())
+			println "ownedBookbyuser:"+ownedBookbyuser
+			Iterator iteratorOwnedBookbyuser = ownedBookbyuser.iterator();	
+			def own
+			def userlist=[]
+			while(iteratorOwnedBookbyuser.hasNext()){
+				own=iteratorOwnedBookbyuser.next()
+				println "iteratorOwnedBookbyuser.next():"+own
+				if(bookOwner.get(own.book.id)){
+					userlist=bookOwner.get(own.book.id)
+					userlist.add(own.user.id)
+					bookOwner.putAt(own.book.id,userlist)
+				}else{
+					userlist.add(own.user.id)
+					bookOwner.put(own.book.id,userlist)
+					books.add(own.book)//book list
+				}
+			}
+		}
+		println "bookOwner:"+bookOwner
+		println "books result:"+books
+        respond books, model:[bookInstanceCount: Book.count()]//Book.list(params)
     }
 
     def show(Book bookInstance) {
