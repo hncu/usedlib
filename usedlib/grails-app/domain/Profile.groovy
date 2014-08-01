@@ -1,10 +1,11 @@
 class Profile {
+	ShiroUser user
 	String bAvatar//头像
 	String mAvatar
 	String sAvatar
 	String realname
-	String gpsLongitude//经度
-	String gpsLatitude//纬度	123456	todo
+	//String gpsLongitude//经度
+	//String gpsLatitude//纬度	123456	todo
 	String province
 	String city
 	String dist //区
@@ -13,15 +14,13 @@ class Profile {
 	String weibo
 	String qq
 	String weixin
-	
-	static belongsTo =[user :ShiroUser]
     static constraints = {
 		bAvatar(nullable:true, blank:true)
 		mAvatar(nullable:true, blank:true)
 		sAvatar(nullable:true, blank:true)
 		realname(nullable:true, blank:true)
-		gpsLongitude(nullable:true, blank:true)
-		gpsLatitude(nullable:true, blank:true)
+		//gpsLongitude(nullable:true, blank:true)
+		//gpsLatitude(nullable:true, blank:true)
 		province(nullable:true, blank:true)
 		city(nullable:true, blank:true)
 		dist(nullable:true, blank:true)

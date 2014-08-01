@@ -24,18 +24,16 @@ class SignupController {
             } else { // Passwords match. Let's attempt to save the user
                 // Create user
                 user = new ShiroUser(username: params.username,passwordHash: shiroSecurityService.encodePassword(params.password))
-				def profi=new Profile()				
-				if(profi.save()){
-					user.profile=profi
-				}				
+				
 				session.ShiroUser=user
 				session.OwnedBookCount=0
 				session.borrowedBookCount=0
 				session.lendedBookCount=0
 				
                 if (user.save()) {
+					new Profile(user:user).save()					
                     // Add USER role to new user
-                    user.addToRoles(ShiroRole.findByName('ROLE_USER'))
+                    user.addToRoles(ShiroRole.findByName('ROLE_USER')).save(flush: true, failOnError: true)
                     // Login user
                     def authToken = new UsernamePasswordToken(user.username, params.password)
                     SecurityUtils.subject.login(authToken)
