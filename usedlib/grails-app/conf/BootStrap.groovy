@@ -8,7 +8,7 @@ class BootStrap {
 		switch (GrailsUtil.environment) {
 
 			case  "development":
-				createTestingUsers()
+			//	createTestingUsers()
 			//				createTestingCategorys()
 			//				createTestingBooks()
 			//				createTestingOwns()
