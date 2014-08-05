@@ -57,7 +57,7 @@ class BootStrap {
 		assert standardUser.addToRoles(userRole)
 		.save(flush: true, failOnError: true)
 
-		for(i in 0..3) {
+		for(i in 0..9) {
 			def knighti = ShiroUser.findByUsername("knight${i}") ?:
 					new ShiroUser(username:"knight${i}",
 					passwordHash:shiroSecurityService.encodePassword('111111'))
