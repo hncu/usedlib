@@ -34,12 +34,12 @@
 						</div>
 						<div class="col-md-8">
 							<p><g:link action="show" id="${shiroUserInstance.id}">${fieldValue(bean: shiroUserInstance, field: "username")}</g:link></p>
-							<p>	<span>LV${fieldValue(bean: shiroUserInstance, field: "level")}</span>
+							<p>	<span class="label label-default">LV${fieldValue(bean: shiroUserInstance, field: "level")}</span>
 								<span>最后登录:<g:formatDate format="yyyy-MM-dd HH:mm:ss" date="${shiroUserInstance.lastLoginDay}"/></span></p>
-							<p>	<span>拥有图书:${fieldValue(bean: shiroUserInstance, field: "numOwnedBook")};</span>
-								<span>借阅图书:${fieldValue(bean: shiroUserInstance, field: "numBorrowedBook")};</span>
-								<span>外借图书:${fieldValue(bean: shiroUserInstance, field: "numLendedBook")};</span>
-								<span>读书:${fieldValue(bean: shiroUserInstance, field: "numReadedBook")};</span></p>
+							<p>	<span class="label label-default">拥有图书:${fieldValue(bean: shiroUserInstance, field: "numOwnedBook")};</span>
+								<span class="label label-default">借阅图书:${fieldValue(bean: shiroUserInstance, field: "numBorrowedBook")};</span>
+								<span class="label label-default">外借图书:${fieldValue(bean: shiroUserInstance, field: "numLendedBook")};</span>
+								<span class="label label-default">读书:${fieldValue(bean: shiroUserInstance, field: "numReadedBook")};</span></p>
 							<span></span>
 						</div>
 						<div class="col-md-2">
