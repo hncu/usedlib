@@ -114,7 +114,7 @@
 			<g:form class="form-horizontal" url="[resource:bookInstance, controller:'book',action:'searchBook']" >
 				<fieldset class="form">
 					<div class="form-group">
-					    <g:textField name="isbn13" required="" value="请输入ISBN号或者书名"/>
+					    <g:textField name="searchString" required="" value="请输入ISBN号或者书名" onclick="this.value='';focus()"/>
 					</div>
 				</fieldset>
 				<fieldset class="buttons">
