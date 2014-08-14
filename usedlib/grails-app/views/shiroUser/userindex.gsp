@@ -20,7 +20,7 @@
 <!-- for friends -->		
 		<div class="well">
 			<div class="table">
-			<h1><g:message code="default.list.label" args="[entityName]" />好友列表</h1>
+			<!--<h1><g:message code="default.list.label" args="[entityName]" />好友列表</h1>-->
 				<table class="table table-striped">
 				<thead>
 						<tr>
