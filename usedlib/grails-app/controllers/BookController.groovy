@@ -15,44 +15,56 @@ class BookController {
         params.max = Math.min(max ?: 20, 100)
 		//def nearbyUser= ShiroUser.findAllByGpsLongitudeBetweenAndGpsLatitudeBetween(112.41,112.45,28.547,28.548)
 		//print "findByGpsLongitudeBetween:"+nearbyUser
-		
-		def c = ShiroUser.createCriteria()
-		def nearbyUser = c {
-			between("gpsLongitude", (double)112.41,(double)112.45)
-			and {
-				between("gpsLatitude", (double)28.547,(double)28.548)
-			}
-			maxResults(10)
-			order("gpsLongitude", "desc")
-		}
-		//println "nearbyUser"+nearbyUser
-
-		Iterator iteratorUser = nearbyUser.iterator();
 		def books=[]
-		def bookOwner=[:]
-		while(iteratorUser.hasNext()) {
-			def ownedBookbyuser=OwnedBook.findAllByUser(iteratorUser.next())
-			println "ownedBookbyuser:"+ownedBookbyuser
-			Iterator iteratorOwnedBookbyuser = ownedBookbyuser.iterator();	
-			def own
-			def userlist=[]
-			while(iteratorOwnedBookbyuser.hasNext()){
-				own=iteratorOwnedBookbyuser.next()
-				//println "iteratorOwnedBookbyuser.next():"+own
-				if(bookOwner.get(own.book.id)){
-					userlist=bookOwner.get(own.book.id)
-					userlist.add(own.user.id)
-					bookOwner.putAt(own.book.id,userlist)
-				}else{
-					userlist.add(own.user.id)
-					bookOwner.put(own.book.id,userlist)
-					books.add(own.book)//book list
+		def bookAll=[]
+		if(params.offset==null||params.offset.toInteger()==0)
+		{
+			def c = ShiroUser.createCriteria()
+			def nearbyUser = c {
+				between("gpsLongitude", (double)112.41,(double)112.45)
+				and {
+					between("gpsLatitude", (double)28.547,(double)28.548)
+				}
+				maxResults(10)
+				order("gpsLongitude", "desc")
+			}
+			//println "nearbyUser"+nearbyUser
+	
+			Iterator iteratorUser = nearbyUser.iterator();
+			def bookOwner=[:]
+			while(iteratorUser.hasNext()) {
+				def ownedBookbyuser=OwnedBook.findAllByUser(iteratorUser.next())
+				println "ownedBookbyuser:"+ownedBookbyuser
+				Iterator iteratorOwnedBookbyuser = ownedBookbyuser.iterator();	
+				def own
+				def userlist=[]
+				while(iteratorOwnedBookbyuser.hasNext()){
+					own=iteratorOwnedBookbyuser.next()
+					//println "iteratorOwnedBookbyuser.next():"+own
+					if(bookOwner.get(own.book.id)){
+						userlist=bookOwner.get(own.book.id)
+						userlist.add(own.user.id)
+						bookOwner.putAt(own.book.id,userlist)
+					}else{
+						userlist.add(own.user.id)
+						bookOwner.put(own.book.id,userlist)
+						books.add(own.book)//book list
+					}
 				}
 			}
-		}
 		//println "bookOwner:"+bookOwner
 		//println "books result:"+books
-        respond Book.list(params), model:[bookInstanceCount: Book.count()]//books
+
+			bookAll=Book.list()
+			books=bookAll[0..19]
+			flash.bookall=bookAll		
+		}else{
+			bookAll=flash.bookall
+			def min= Math.min(19,(bookAll.size()-params.offset.toInteger()))
+			books=bookAll[params.offset.toInteger()..(params.offset.toInteger()+min-1)]
+		}
+	
+        respond books, model:[params:params,bookInstanceCount: Book.count()]//Book.list(params)
     }
 
     def show(Book bookInstance) {
