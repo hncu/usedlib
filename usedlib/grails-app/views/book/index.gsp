@@ -6,7 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'book.label', default: 'Book')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-		<!-- <script type="text/javascript" src="/usedlib/js/douban_api.js"></script> -->
+		 <script type="text/javascript" src="/usedlib/js/douban_api.js"></script><!-- -->
 		
 	</head>
 	<body>
@@ -20,7 +20,7 @@
 					<g:each in="${bookInstanceList}" var="bookInstance">
 						<li class="thumbnail col-md-2" style="height:220px;margin: 10px 7px 5px 7px;">
 							<div id=${bookInstance.isbn13}.img>${bookInstance.isbn13}</div>
-							<div class="col-md-offset-1"><g:link class="" action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></div>
+							<div class="col-md-offset-1" id=${bookInstance.isbn13}.title><g:link class="" action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></div>
 						</li>
 <script type="text/javascript">
 DOUBAN.apikey = 
@@ -28,11 +28,12 @@ DOUBAN.apikey =
 	    isbn:${bookInstance.isbn13},
 	    callback:function(re){
 	        //alert(re.title);
-	        var Title=re.title;
-	        var bookTitle=re.title;
+	        var TitleEle=document.getElementById(re.isbn13+'.title').childNodes;
+	        var	Title=TitleEle[0].innerHTML;
 	        var len=Title.length;
 	        if(len>15){
 	        	var bookTitle = Title.slice(0, 15);
+	        	TitleEle[0].innerHTML=bookTitle+"..."
 	        	//document.getElementById(re.isbn13+'.title').innerHTML="<font size='1' >"+bookTitle+"</font>"
 		        }
 	        //else{
