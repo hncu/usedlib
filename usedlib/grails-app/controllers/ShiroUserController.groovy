@@ -21,10 +21,11 @@ class ShiroUserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		params.sort="gpsLongitude"
+		//params.sort="gpsLongitude"
 		//println params
-		def nearbyUser= ShiroUser.findAllByGpsLongitudeBetweenAndGpsLatitudeBetween(112.41,112.45,28.547,28.548)
-		//print "findByGpsLongitudeBetween:"+nearbyUser
+		def nearbyUser= Profile.findAllByGpsLongitudeBetweenAndGpsLatitudeBetween(112.41,112.45,28.547,28.548)
+		def aaa=nearbyUser.user
+		print "findByGpsLongitudeBetween:"+nearbyUser+aaa
         respond ShiroUser.list(params), model:[shiroUserInstanceCount: ShiroUser.count()]//112.39 //ShiroUser.list(params)
     }
 

@@ -31,7 +31,7 @@
 			<div class="row">
 				<div class="col-md-10"><g:layoutBody/></div>				
 				<div class="col-md-2">
-					<img src="${resource(dir: 'images', file: 'default_avatar.jpg')}" alt="sidebar"/>
+					<img style="width:150px;height:150px" src="${resource(dir: 'images/avatar', file: "${session.ShiroUser.profile.bAvatar}")}" alt="sidebar"/>
 					<g:render template="/layouts/sidebar"/>
 				</div>
 			</div>			

@@ -23,7 +23,7 @@
 				<g:each in="${shiroUserInstanceList}" status="i" var="shiroUserInstance">
 					<li style="border-bottom:1px  #CCCCCC solid;padding:0px;">
 						<div class="col-md-2">
-							<img class="img-rounded" style="width:100px;height:100px"src="${resource(dir: 'images', file: 'default_avatar.jpg')}" alt="sidebar"/>  
+							<img class="img-rounded" style="width:100px;height:100px"src="${resource(dir: 'images/avatar', file: "${shiroUserInstance.profile.bAvatar}")}" alt="sidebar"/>  
 						</div>
 						<div class="col-md-8">
 							<p><g:link action="show" id="${shiroUserInstance.id}">${fieldValue(bean: shiroUserInstance, field: "username")}</g:link></p>

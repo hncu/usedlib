@@ -60,7 +60,6 @@ class ProfileController {
             respond profileInstance.errors, view:'edit'
             return
         }
-		println params.profileContent
 		switch(params.profileContent){
 			case "base": break
 			
