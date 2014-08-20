@@ -2,8 +2,6 @@ class ShiroUser {
     String username
     String passwordHash
 	String email
-	double gpsLongitude//¾­¶È112.355145
-	double gpsLatitude//Î³¶È28.559382
 	//Profile profile
 	Date signupDay
 	Date lastLoginDay
@@ -27,8 +25,6 @@ class ShiroUser {
 
     static constraints = {
         username(nullable: false, blank: false, unique: true)
-		gpsLongitude(nullable:true,blank:false)
-		gpsLatitude(nullable:true,blank:false)
 		profile(nullable:true,blank:false,unique:true)
 		signupDay(nullable:true,blank:false)
 		lastLoginDay(nullable:true,blank:false)

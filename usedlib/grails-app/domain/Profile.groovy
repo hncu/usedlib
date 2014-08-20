@@ -4,8 +4,8 @@ class Profile {
 	String mAvatar
 	String sAvatar
 	String realname
-	//String gpsLongitude//经度
-	//String gpsLatitude//纬度	123456	todo
+	double gpsLongitude//经度112.355145
+	double gpsLatitude//纬度28.559382
 	String province
 	String city
 	String dist //区
@@ -19,8 +19,8 @@ class Profile {
 		mAvatar(nullable:true, blank:true)
 		sAvatar(nullable:true, blank:true)
 		realname(nullable:true, blank:true)
-		//gpsLongitude(nullable:true, blank:true)
-		//gpsLatitude(nullable:true, blank:true)
+		gpsLongitude(nullable:true,blank:false)
+		gpsLatitude(nullable:true,blank:false)
 		province(nullable:true, blank:true)
 		city(nullable:true, blank:true)
 		dist(nullable:true, blank:true)

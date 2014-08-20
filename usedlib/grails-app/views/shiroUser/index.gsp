@@ -79,10 +79,6 @@
 						
 							<td>${fieldValue(bean: shiroUserInstance, field: "email")}</td>
 							
-							<td>${fieldValue(bean: shiroUserInstance, field: "gpsLongitude")}</td>
-						
-							<td>${fieldValue(bean: shiroUserInstance, field: "gpsLatitude")}</td>
-							
 							<td>${fieldValue(bean: shiroUserInstance, field: "huoyuedu")}</td>
 							<td>
 			<g:form class="form-horizontal" url="[controller:'friends', action:'save']" >
