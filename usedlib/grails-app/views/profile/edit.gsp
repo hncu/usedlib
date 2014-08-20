@@ -33,8 +33,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form class="form-horizontal" url="[resource:profileInstance, action:'update']" method="PUT" >
-				<g:hiddenField name="version" value="${profileInstance?.version}" />
+
 				<!-- sidebar -->
 <div class="tabbable">  
     <ul class="col-md-2 well nav nav-pills nav-stacked">  
@@ -45,6 +44,9 @@
     </ul>  
     <div class="tab-content">  
         <div class="tab-pane" id="base">  
+        <g:form class="form-horizontal" url="[resource:profileInstance, action:'update']" method="PUT" >
+        	<input type="hidden" name="profileContent" value="base" />       
+			<g:hiddenField name="version" value="${profileInstance?.version}" />
 			<div class="form-group fieldcontain ${hasErrors(bean: profileInstance, field: 'realname', 'error')} ">
 				<label class="col-sm-2 control-label" for="realname">
 					<g:message class="col-sm-3" code="profile.realname.label" default="Realname" />
@@ -52,41 +54,36 @@
 				</label>
 				<g:textField name="realname" value="${profileInstance?.realname}"/>
 			
-			</div>  
+			</div>
+				<fieldset class="buttons">
+					<g:actionSubmit class="col-sm-offset-2 btn btn-primary save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+				</fieldset>
+		</g:form>
         </div>  
-        <div id="avatar" class="tab-pane">  
-			<div class="form-group fieldcontain ${hasErrors(bean: profileInstance, field: 'bAvatar', 'error')} ">
-				<label class="col-sm-2 control-label" for="bAvatar">
-					<g:message class="col-sm-3" code="profile.bAvatar.label" default="B Avatar" />
-					
-				</label>
-				<g:textField name="bAvatar" value="${profileInstance?.bAvatar}"/>
-			
-			</div>
-			
-			<div class="form-group fieldcontain ${hasErrors(bean: profileInstance, field: 'mAvatar', 'error')} ">
-				<label class="col-sm-2 control-label" for="mAvatar">
-					<g:message class="col-sm-3" code="profile.mAvatar.label" default="M Avatar" />
-					
-				</label>
-				<g:textField name="mAvatar" value="${profileInstance?.mAvatar}"/>
-			
-			</div>
-			
-			<div class="form-group fieldcontain ${hasErrors(bean: profileInstance, field: 'sAvatar', 'error')} ">
-				<label class="col-sm-2 control-label" for="sAvatar">
-					<g:message class="col-sm-3" code="profile.sAvatar.label" default="S Avatar" />
-					
-				</label>
-				<g:textField name="sAvatar" value="${profileInstance?.sAvatar}"/>
-			
-			</div>  
+        <div id="avatar" class="active tab-pane">  
+        	<h2>我的头像</h2>
+			<g:uploadForm url="[resource:profileInstance, action:'update']"  method="post" >
+				<input type="hidden" name="profileContent" value="avatar" />
+				<g:hiddenField name="version" value="${profileInstance?.version}" />
+				<img src="${createLinkTo(dir:'images/avatar/',file:Profile.findById(session.ShiroUser?.id).bAvatar)}">
+				<input type="file" id="payload" name="payload"/>
+				<g:actionSubmit class="col-sm-offset-2 btn btn-primary save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+			</g:uploadForm>
         </div>
-		<div id="map" class="active tab-pane">
-			<g:hiddenField type="hidden" name="gpsLongitude" value="${profileInstance?.gpsLongitude}"/>
-			<g:hiddenField type="hidden" name="gpsLatitude" value="${profileInstance?.gpsLatitude}"/>
-			<div id="allmap" style="width:500px;height:400px;overflow: hidden;margin:0"></div></div>
-		<script type="text/javascript" src="/usedlib/js/baidumap.js"></script>
+        
+		<div id="map" class="tab-pane">
+	        <g:form class="form-horizontal" url="[resource:profileInstance, action:'update']" method="PUT" >
+				<input type="hidden" name="profileContent" value="gps" />
+				<g:hiddenField type="hidden" name="gpsLongitude" value="${profileInstance?.gpsLongitude}"/>
+				<g:hiddenField type="hidden" name="gpsLatitude" value="${profileInstance?.gpsLatitude}"/>
+				<div id="allmap" style="width:500px;height:400px;overflow: hidden;margin:0"></div>
+				<script type="text/javascript" src="/usedlib/js/baidumap.js"></script>
+				<fieldset class="buttons">
+					<g:actionSubmit class="col-sm-offset-2 btn btn-primary save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+				</fieldset>
+			</g:form>			
+		</div>
+
     </div>
 
 </div>
@@ -96,10 +93,7 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>-->
-				<fieldset class="buttons">
-					<g:actionSubmit class="col-sm-offset-2 btn btn-primary save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
-			</g:form>
+
 		</div>
 	</body>
 </html>
