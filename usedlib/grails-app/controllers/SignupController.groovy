@@ -26,10 +26,7 @@ class SignupController {
                 user = new ShiroUser(username: params.username,passwordHash: shiroSecurityService.encodePassword(params.password))
 				
 				session.ShiroUser=user
-				session.OwnedBookCount=0
-				session.borrowedBookCount=0
-				session.lendedBookCount=0
-				
+	
                 if (user.save()) {
 					new Profile(user:user).save()					
                     // Add USER role to new user
