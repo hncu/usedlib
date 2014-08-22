@@ -29,6 +29,7 @@ class ShiroSecurityFilters {
 		//[controller: 'borrow', action: '*', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		[controller: 'shiroUser', action: 'userindex', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		[controller: 'shiroUser', action: 'index', roles: ['ROLE_ADMIN', 'ROLE_USER']],
+		[controller: 'shiroUser', action: 'show', roles: ['ROLE_ADMIN', 'ROLE_USER']],
 		[controller: 'shiroUser', action: '*', roles: ['ROLE_ADMIN']]
 		
 	]

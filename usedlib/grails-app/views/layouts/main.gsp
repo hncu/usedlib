@@ -31,8 +31,9 @@
 			<div class="row">
 				<div class="col-md-10"><g:layoutBody/></div>				
 				<div class="col-md-2">
-					<img style="width:150px;height:150px" src="${resource(dir: 'images/avatar', file: "${session.ShiroUser.profile.bAvatar}")}" alt="sidebar"/>
+				<shiro:isLoggedIn>
 					<g:render template="/layouts/sidebar"/>
+				</shiro:isLoggedIn>
 				</div>
 			</div>			
 			<g:render template="/layouts/footer"/>

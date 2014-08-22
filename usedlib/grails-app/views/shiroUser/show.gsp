@@ -27,19 +27,7 @@
 					</dl>
 				</li>
 				</g:if>
-			
-				<g:if test="${shiroUserInstance?.passwordHash}">
-				<li class="fieldcontain">
-					<dl class="dl-horizontal">
-						<dt><span id="passwordHash-label" class="property-label"><g:message code="shiroUser.passwordHash.label" default="Password Hash" /></span></dt>
-						<dd>
-						
-							<span class="property-value" aria-labelledby="passwordHash-label"><g:fieldValue bean="${shiroUserInstance}" field="passwordHash"/></span>
-						
-						</dd>
-					</dl>
-				</li>
-				</g:if>
+
 			
 				<g:if test="${shiroUserInstance?.email}">
 				<li class="fieldcontain">
@@ -114,6 +102,7 @@
 						
 							<g:each in="${shiroUserInstance.borrowedBookOwner}" var="b">
 							<span class="property-value" aria-labelledby="borrowedBookOwner-label"><g:link controller="borrowedBook" action="show" id="${b.id}">${b?.encodeAsHTML()}</g:link></span>
+							<br/>
 							</g:each>
 						
 						</dd>

@@ -19,8 +19,8 @@ class BookController {
 		def bookAll=[]
 		if(params.offset==null||params.offset.toInteger()==0)
 		{
-			def c = ShiroUser.createCriteria()
-			def nearbyUser = c {
+			def c = Profile.createCriteria()
+			def nearbyProfile = c {
 				between("gpsLongitude", (double)112.41,(double)112.45)
 				and {
 					between("gpsLatitude", (double)28.547,(double)28.548)
@@ -28,13 +28,13 @@ class BookController {
 				maxResults(10)
 				order("gpsLongitude", "desc")
 			}
-			//println "nearbyUser"+nearbyUser
+			//println "nearbyProfile.user"+nearbyProfile.user
 	
-			Iterator iteratorUser = nearbyUser.iterator();
+			Iterator iteratorUser = nearbyProfile.user.iterator();
 			def bookOwner=[:]
 			while(iteratorUser.hasNext()) {
 				def ownedBookbyuser=OwnedBook.findAllByUser(iteratorUser.next())
-				println "ownedBookbyuser:"+ownedBookbyuser
+				//println "ownedBookbyuser:"+ownedBookbyuser
 				Iterator iteratorOwnedBookbyuser = ownedBookbyuser.iterator();	
 				def own
 				def userlist=[]
