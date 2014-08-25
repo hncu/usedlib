@@ -36,14 +36,20 @@
 
 				<!-- sidebar -->
 <div class="tabbable">  
-    <ul class="col-md-2 well nav nav-pills nav-stacked">  
-        <li><a href="#base" data-toggle="tab">基本资料</a></li>  
-        <li><a href="#avatar" data-toggle="tab">我的头像</a></li>  
-        <li class="active"><a href="#map" data-toggle="tab">我的地图</a></li>
-        <li><a href="#3" data-toggle="tab">详细资料</a></li>
+    <ul class="col-md-2 well nav nav-pills nav-stacked">
+    		<g:if test="${(params.profileContent=='avatar')||(params.profileContent==null)}"><li class="active"></g:if>
+    		<g:else><li></g:else><a href="#base" data-toggle="tab">基本资料</a></li>
+    		
+	      	<g:if test="${params.profileContent=='avatar'}"><li class="active"></g:if>
+    		<g:else><li></g:else> <a href="#avatar" data-toggle="tab">我的头像</a></li>
+    		
+	        <li class=""><a href="#map" data-toggle="tab">我的地图</a></li>
+	        
+	        <li><a href="#3" data-toggle="tab">详细资料</a></li>
     </ul>  
     <div class="tab-content">  
-        <div class="tab-pane" id="base">  
+        <g:if test="${(params.profileContent=='avatar')||(params.profileContent==null)}"><div class="tab-pane active" id="base"></g:if>
+        <g:else><div class="tab-pane" id="base"></g:else>
         <g:form class="form-horizontal" url="[resource:profileInstance, action:'update']" method="PUT" >
         	<input type="hidden" name="profileContent" value="base" />       
 			<g:hiddenField name="version" value="${profileInstance?.version}" />
@@ -60,7 +66,7 @@
 				</fieldset>
 		</g:form>
         </div>  
-        <div id="avatar" class="active tab-pane">  
+        <div id="avatar" class="tab-pane">  
         	<h2>我的头像</h2>
 			<g:uploadForm url="[resource:profileInstance, action:'update']"  method="post" >
 				<input type="hidden" name="profileContent" value="avatar" />

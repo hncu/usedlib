@@ -61,9 +61,10 @@ class ProfileController {
             return
         }
 		switch(params.profileContent){
-			case "base": break
+			case "base": params.profileContent='avatar';break
 			
 			case "avatar":
+				params.profileContent='gps'
 				def uploadedFile = request.getFile('payload')
 				
 				if(!uploadedFile.empty){
@@ -93,13 +94,15 @@ class ProfileController {
 			case "gps": println "gps";break
 			
 		}
+		println params.profileContent
 
         profileInstance.save flush:true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Profile.label', default: 'Profile'), profileInstance.id])
-                redirect profileInstance
+                //redirect profileInstance
+				respond profileInstance,view:'edit'
             }
             '*'{ respond profileInstance, [status: OK] }
         }
