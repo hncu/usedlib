@@ -91,10 +91,13 @@ DOUBAN.apikey =
 					</g:each>
 					</tbody>
 				</table>
-			</div>-->
+			</div>
 				<div class="pagination">
-					<g:paginate total="${bookInstanceCount ?: 0}" />
-				</div>
+					<g:paginate total="${booksCount ?: 0}" />
+				</div>-->
+				<g:if test="${booksCount>params.offset}">
+					<div><a href="/usedlib/book/index?offset=${params.offset}&max=${params.max}" class="prevLink">更多...</a></div>
+				</g:if>
 		</div>
 	</body>
 </html>
