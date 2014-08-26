@@ -95,7 +95,7 @@ DOUBAN.apikey =
 				<div class="pagination">
 					<g:paginate total="${booksCount ?: 0}" />
 				</div>-->
-				<g:if test="${booksCount>params.offset}">
+				<g:if test="${(booksCount>params.offset)||(flash.bookTotalTemp!=null)}">
 					<div><a href="/usedlib/book/index?offset=${params.offset}&max=${params.max}" class="prevLink">更多...</a></div>
 				</g:if>
 		</div>

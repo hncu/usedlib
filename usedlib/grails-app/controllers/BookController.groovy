@@ -12,14 +12,16 @@ class BookController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-		def moreOffset=3
+		def moreOffset=7
         params.max = Math.min(max ?: moreOffset, 100)
-		def bookTotaltemp=0
+		def bookTotalNum=0
+		def bookTotalTemp=[]
 		def ownedBook=[]
 		def ownedBookTotalCount
 		params.offset=params.offset?:0
 		//println "***********************initial params"+params
-		while(bookTotaltemp<moreOffset){
+		if(!params.offset){flash.bookTotalTemp=null}
+		while(bookTotalNum<moreOffset){
 			def criteria = OwnedBook.createCriteria()
 			def ownedBooktemp = criteria.list (params,{
 				user {
@@ -33,20 +35,30 @@ class BookController {
 			})
 			ownedBookTotalCount=ownedBooktemp.totalCount
 			ownedBook=ownedBook+ownedBooktemp
-			bookTotaltemp=ownedBook*.book.unique().size()
-			//println "+++while+++ownedBook.id="+ownedBook.id
-			//println "ownedBook.book.id="+ownedBook.book.id
-			//println "bookTotaltemp="+bookTotaltemp
-			if(!ownedBooktemp)break
+
+			bookTotalTemp=ownedBook*.book.unique()
+			
+			if(bookTotalTemp[0]?.id==flash.bookEndId){bookTotalTemp?.remove(0)}
+			
+			if(flash.bookTotalTemp) {
+				bookTotalTemp=flash.bookTotalTemp+bookTotalTemp
+			}
+			
+			bookTotalNum=bookTotalTemp.size()
+
 			params.offset=params.offset.toInteger()+moreOffset
+			if(!ownedBooktemp)break
 		}
+
+		if(bookTotalNum>moreOffset){
+			flash.bookTotalTemp=bookTotalTemp.getAt(moreOffset..(bookTotalNum-1))			
+		}else{
+			flash.bookTotalTemp=null
+		}
+		flash.bookEndId=bookTotalTemp[bookTotalNum-1].id
 		
-		def books=ownedBook*.book.unique()
-		//println "-----end params"+params
-		//println "ownedBook*.user.id"+ownedBook*.user.id
-		//println "books*.id"+books*.id
-		//println "books.size()"+books.size()
-		//println "ownedBookTotalCount"+ownedBookTotalCount
+		def books=bookTotalTemp.getAt(0..(Math.min(bookTotalNum,moreOffset)-1))
+		//println "books.id"+books.id
         //respond books, model:[params:params,bookInstanceCount: books.totalCount]//Book.list(params)
 		respond books,model:[booksCount:ownedBookTotalCount]
     }
