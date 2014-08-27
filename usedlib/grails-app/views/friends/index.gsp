@@ -28,7 +28,7 @@
 							<img class="img-rounded" style="width:100px;height:100px"src="${resource(dir: 'images/avatar', file: "${shiroUserInstance.profile.bAvatar}")}" alt="sidebar"/>  
 						</div>
 						<div class="col-md-8">
-							<p><g:link action="show" id="${shiroUserInstance.id}">${fieldValue(bean: shiroUserInstance, field: "username")}</g:link></p>
+							<p><g:link controller="ShiroUser" action="show" id="${shiroUserInstance.id}">${fieldValue(bean: shiroUserInstance, field: "username")}</g:link></p>
 							<p>	<span class="label label-default">LV${fieldValue(bean: shiroUserInstance, field: "level")}</span>
 								<span>最后登录:<g:formatDate format="yyyy-MM-dd HH:mm:ss" date="${shiroUserInstance.lastLoginDay}"/></span></p>
 							<p>	<span class="label label-default">拥有图书:${fieldValue(bean: shiroUserInstance, field: "numOwnedBook")};</span>
