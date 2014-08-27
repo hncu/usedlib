@@ -217,7 +217,7 @@ DOUBAN.apikey =
 							<img class="img-rounded" style="width:100px;height:100px"src="${resource(dir: 'images/avatar', file: "${bookOwnerInstance.profile.bAvatar}")}" alt="sidebar"/>  
 						</div>
 						<div class="col-md-8">
-							<p><g:link action="show" id="${bookOwnerInstance.id}">${fieldValue(bean: bookOwnerInstance, field: "username")}</g:link></p>
+							<p><g:link controller="shiroUser" action="show" id="${bookOwnerInstance.id}">${fieldValue(bean: bookOwnerInstance, field: "username")}</g:link></p>
 							<p>	<span class="label label-default">LV${fieldValue(bean: bookOwnerInstance, field: "level")}</span>
 								<span>最后登录:<g:formatDate format="yyyy-MM-dd HH:mm:ss" date="${bookOwnerInstance.lastLoginDay}"/></span></p>
 							<p>	<span class="label label-default">拥有图书:${fieldValue(bean: bookOwnerInstance, field: "numOwnedBook")};</span>
