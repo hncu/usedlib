@@ -44,7 +44,8 @@ class FriendsController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'friendsInstance.label', default: 'Friends'), friendsInstance.id])
-                redirect friendsInstance
+                //redirect friendsInstance
+                redirect controller:"ShiroUser",action:"index", method:"GET"
             }
             '*' { respond friendsInstance, [status: CREATED] }
         }
@@ -84,7 +85,6 @@ class FriendsController {
             notFound()
             return
         }
-
         friendsInstance.delete flush:true
 
         request.withFormat {
