@@ -45,7 +45,7 @@
 			
 				<g:if test="${shiroUserInstance?.own}">
 				<li class="fieldcontain">
-						<label>拥有的图书http://localhost:8080/usedlib/ownedBook...</label><span id="own-label" class="property-label"><g:message code="shiroUser.own.label" default="Own" /></span>
+						<g:link controller="ownedBook" action="index" params="[userid:shiroUserInstance.id]">拥有的图书..(${shiroUserInstance.numOwnedBook})</g:link>
 						<g:each in="${shiroUserInstance.own}" var="o">
 							<li class="thumbnail col-md-2" style="height:220px;margin: 10px 7px 5px 7px;">
 								<div id=${o.book?.isbn13}.img>${o.book?.isbn13}</div>
