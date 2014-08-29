@@ -42,8 +42,8 @@
 			                <li><a href="/usedlib/friends/index"><i class="glyphicon glyphicon-th-large"></i> 我的好友</a></li>
 			                <li class="divider"></li>
 			                <li><a href="/usedlib/ownedBook/index"><i class="glyphicon glyphicon-align-center"></i> 我的图书</a></li>
-			                <li><a href="/usedlib/borrowedBook/index"><i class="glyphicon glyphicon-indent-right"></i> 借入图书</a></li>
-			                <li><a href="/usedlib/borrowedBook/index"><i class="glyphicon glyphicon-indent-left"></i> 借出图书</a></li>
+			                <li><g:link controller="borrowedBook" action="index"><i class="glyphicon glyphicon-indent-right"></i> 借入图书</g:link></li>
+			                <li><g:link controller="borrowedBook" action="index"><i class="glyphicon glyphicon-indent-left"></i> 借出图书</g:link></li>
 			                <li class="divider"></li>
 			                <li><a href="/usedlib/profile/edit/${session.ShiroUser.id}"><i class="glyphicon glyphicon-cog"></i> 修改个人资料</a></li>
 			                <li><a href="/usedlib/auth/signOut"><i class="glyphicon glyphicon-off"></i> 退出</a></li>
