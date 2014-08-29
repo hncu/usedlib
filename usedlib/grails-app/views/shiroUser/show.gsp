@@ -85,7 +85,7 @@ DOUBAN.apikey =
 			<div style="clear: both"></div>
 			<br/>
 			
-				<g:if test="${shiroUserInstance?.borrowedBookOwner}">
+<!-- 			<g:if test="${shiroUserInstance?.borrowedBookOwner}">
 				<li class="fieldcontain">
 						<label>借入的图书</label><span id="borrowedBookOwner-label" class="property-label"><g:message code="shiroUser.borrowedBookOwner.label" default="Borrowed Book Owner" /></span><br/>
 						<g:each in="${shiroUserInstance.borrowedBookOwner}" var="b">
@@ -93,7 +93,7 @@ DOUBAN.apikey =
 							<br/>
 						</g:each>
 				</li>
-				</g:if>
+				</g:if> -->	
 		
 				<g:if test="${shiroUserInstance?.email}">
 				<li class="fieldcontain">
@@ -103,12 +103,12 @@ DOUBAN.apikey =
 				</li>
 				</g:if>
 			
-				<g:if test="${shiroUserInstance?.profile}">
+<!-- 			<g:if test="${shiroUserInstance?.profile}">
 				<li class="fieldcontain">
 						<h3>用户详情</h3><span id="profile-label" class="property-label"><g:message code="shiroUser.profile.label" default="Profile" /></span>
 						<span class="property-value" aria-labelledby="profile-label"><g:link controller="profile" action="show" id="${shiroUserInstance?.profile?.id}">${shiroUserInstance?.profile?.encodeAsHTML()}</g:link></span>
 				</li>
-				</g:if>
+				</g:if> -->
 			
 				<g:if test="${shiroUserInstance?.huoyuedu}">
 				<li class="fieldcontain">
@@ -149,7 +149,7 @@ DOUBAN.apikey =
 				</li>
 				</g:if>
 			
-				<g:if test="${shiroUserInstance?.friends}">
+<!-- 			<g:if test="${shiroUserInstance?.friends}">
 				<li class="fieldcontain">
 					<dl class="dl-horizontal">
 						<dt><span id="friends-label" class="property-label"><g:message code="shiroUser.friends.label" default="Friends" /></span></dt>
@@ -162,7 +162,7 @@ DOUBAN.apikey =
 						</dd>
 					</dl>
 				</li>
-				</g:if>
+				</g:if> -->	
 			
 				<g:if test="${shiroUserInstance?.permissions}">
 				<li class="fieldcontain">
@@ -192,7 +192,7 @@ DOUBAN.apikey =
 				</li>
 				</g:if>
 			
-				<g:if test="${shiroUserInstance?.sendMessages}">
+<!--				<g:if test="${shiroUserInstance?.sendMessages}">
 				<li class="fieldcontain">
 					<dl class="dl-horizontal">
 						<dt><span id="sendMessages-label" class="property-label"><g:message code="shiroUser.sendMessages.label" default="Send Messages" /></span></dt>
@@ -205,15 +205,16 @@ DOUBAN.apikey =
 						</dd>
 					</dl>
 				</li>
-				</g:if>
+				</g:if>-->
 			
 			</ol>
+<!-- 		
 			<g:form url="[resource:shiroUserInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="col-sm-offset-2 btn btn-primary edit" action="edit" resource="${shiroUserInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="btn btn-default delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
-			</g:form>
+			</g:form> -->	
 		</div>
 	</body>
 </html>
