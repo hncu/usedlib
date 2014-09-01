@@ -245,7 +245,7 @@ DOUBAN.apikey =
 				</ul>
 			</div>			
 				<div class="pagination">
-					<g:paginate total="${bookOwnerListInstanceCount ?: 0}" />
+					<g:paginate total="${bookOwnerListInstanceCount ?: 0}" id="${bookInstance.id}"/>
 				</div>
 		</div>
    

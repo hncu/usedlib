@@ -63,9 +63,11 @@ class BookController {
 		respond books,model:[booksCount:ownedBookTotalCount]
     }
 
-    def show(Book bookInstance) {
-		def bookOwnerList=OwnedBook.findAllByBook((Book)bookInstance).user
-		respond bookInstance, model:[bookOwnerList:bookOwnerList,bookOwnerListInstanceCount: bookOwnerList.size()]
+    def show(Book bookInstance,Integer max) {
+		params.max = Math.min(max ?: 10, 100)		
+		def bookOwnerList=OwnedBook.findAllByBook(bookInstance,params).user
+		def bookOwnerListCount=OwnedBook.findAllByBook((Book)bookInstance).user.size()
+		respond bookInstance, model:[bookOwnerList:bookOwnerList,bookOwnerListInstanceCount: bookOwnerListCount]
     }
 
     def create() {
