@@ -9,14 +9,17 @@ class FriendsController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def friendslist
+		def friendsList
+		def friendsListCount
 		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
-			friendslist=Friends.list(params)
+			friendsList=Friends.list(params)
+			friendsListCount=Friends.count
 		}else{
 			def user=ShiroUser.findById(session .ShiroUser?.id)
-			friendslist=Friends.findAllByUser(user)
+			friendsList=Friends.findAllByUser(user,params)
+			friendsListCount=Friends.countByUser(user)
 		}
-        respond friendslist, model:[friendsInstanceCount: Friends.count()]
+        respond friendsList, model:[friendsInstanceCount: friendsListCount]
     }
 
     def show(Friends friendsInstance) {
