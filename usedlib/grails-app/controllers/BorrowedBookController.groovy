@@ -59,7 +59,7 @@ class BorrowedBookController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'borrowedBookInstance.label', default: 'BorrowedBook'), borrowedBookInstance.id])
-                redirect borrowedBookInstance
+                redirect borrowedBookInstance.book
             }
             '*' { respond borrowedBookInstance, [status: CREATED] }
         }
