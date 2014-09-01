@@ -10,14 +10,28 @@ class BorrowedBookController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		
 		def borrower=ShiroUser.findById(session.ShiroUser?.id)
-		def borrowedBook=BorrowedBook.findAllByBorrower(borrower)
+		def borrowedBook
+		def borrowedBookCount
+		def lendedBook
+		def lendedBookCount
+		if(params.lendOrBorrow=='borrow'){
+			params.lendOrBorrow='borrow'
+			borrowedBook=BorrowedBook.findAllByBorrower(borrower,params)
+			borrowedBookCount=BorrowedBook.countByBorrower(borrower)			
+		}
+		if(params.lendOrBorrow=='lend'){
+			params.lendOrBorrow='lend'
+			lendedBook=BorrowedBook.findAllByOwner(borrower,params)
+			lendedBookCount=BorrowedBook.countByOwner(borrower)
+		}
 		
-		def lendedBook=BorrowedBook.findAllByOwner(borrower)
 		
         //respond BorrowedBook.list(params), model:[borrowedBookInstanceCount: BorrowedBook.count()]
-		respond borrowedBook, model:[borrowedBookInstanceCount:borrowedBook.size(),lendedBookInstanceList:lendedBook,lendedBookInstanceCount:lendedBook.size()]
+		//respond borrowedBook, model:[borrowedBookInstanceCount:borrowedBookCount,
+		//							 lendedBookInstanceList:lendedBook,lendedBookInstanceCount:lendedBookCount]
+		[borrowedBookInstanceList:borrowedBook,borrowedBookInstanceCount:borrowedBookCount,
+										 lendedBookInstanceList:lendedBook,lendedBookInstanceCount:lendedBookCount]
     }
 
     def show(BorrowedBook borrowedBookInstance) {
