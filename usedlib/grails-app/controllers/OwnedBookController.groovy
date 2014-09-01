@@ -10,18 +10,21 @@ class OwnedBookController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 		def ownedbooklist
+		def ownedbooklistCount
 		def userid
 		if(!params.userid){
 			params.userid=session .ShiroUser?.id
 		}
 		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
 			ownedbooklist=OwnedBook.list(params)
+			ownedbooklistCount=OwnedBook.count
 		}else{			
 			def user=ShiroUser.findById(params.userid)
 			ownedbooklist=OwnedBook.findAllByUser(user)
+			ownedbooklistCount=OwnedBook.countByUser(user)
 		}
 		println "params.userid"+params.userid
-        respond ownedbooklist, model:[ownedBookInstanceCount: ownedbooklist.size()]
+        respond ownedbooklist, model:[ownedBookInstanceCount: ownedbooklistCount]
     }
 
     def show(OwnedBook ownedBookInstance) {
