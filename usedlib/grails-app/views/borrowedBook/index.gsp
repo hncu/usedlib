@@ -22,7 +22,7 @@
 						
 							<th><g:message code="borrowedBook.owner.label" default="Owner" /></th>
 						
-							<th><g:message code="borrowedBook.borrower.label" default="Borrower" /></th>
+							<!--<th><g:message code="borrowedBook.borrower.label" default="Borrower" /></th> -->
 						
 							<th><g:message code="borrowedBook.book.label" default="Book" /></th>
 						
@@ -38,9 +38,9 @@
 					<g:each in="${borrowedBookInstanceList}" status="i" var="borrowedBookInstance">
 						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						
-							<td><g:link action="show" id="${borrowedBookInstance.id}">${fieldValue(bean: borrowedBookInstance, field: "owner")}</g:link></td>
+							 <td><g:link action="show" id="${borrowedBookInstance.id}">${fieldValue(bean: borrowedBookInstance, field: "owner")}</g:link></td> 
 						
-							<td>${fieldValue(bean: borrowedBookInstance, field: "borrower")}</td>
+							<!--<td>${fieldValue(bean: borrowedBookInstance, field: "borrower")}</td>-->
 						
 							<td>${fieldValue(bean: borrowedBookInstance, field: "book")}</td>
 						

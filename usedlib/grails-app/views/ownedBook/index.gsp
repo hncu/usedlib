@@ -22,7 +22,7 @@
 						<p hidden="hidden">${bookInstance=ownedBookInstance.book}</p>
 						<li class="thumbnail col-md-2" style="height:220px;margin: 10px 7px 5px 7px;">
 							<div id=${bookInstance.isbn13}.img>${bookInstance.isbn13}</div>
-							<div class="col-md-offset-1" id=${bookInstance.isbn13}.title><g:link class="" action="show" id="${ownedBookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></div>
+							<div class="col-md-offset-1" id=${bookInstance.isbn13}.title><g:link class="" controller="book" action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></div>
 						</li>
 <script type="text/javascript">
 DOUBAN.apikey = 

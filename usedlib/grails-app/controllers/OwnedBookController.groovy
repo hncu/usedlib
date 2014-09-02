@@ -23,7 +23,7 @@ class OwnedBookController {
 			ownedbooklist=OwnedBook.findAllByUser(user)
 			ownedbooklistCount=OwnedBook.countByUser(user)
 		}
-		println "params.userid"+params.userid
+		//println "params.userid"+params.userid
         respond ownedbooklist, model:[ownedBookInstanceCount: ownedbooklistCount]
     }
 
