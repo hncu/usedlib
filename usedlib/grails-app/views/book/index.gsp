@@ -16,88 +16,20 @@
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<div class="well">
-				<ul class="row" style="list-style-type :none;">
-					<g:each in="${bookInstanceList}" var="bookInstance">
-						<li class="thumbnail col-md-2" style="height:220px;margin: 10px 7px 5px 7px;">
-							<div id=${bookInstance.isbn13}.img>${bookInstance.isbn13}</div>
-							<div class="col-md-offset-1" id=${bookInstance.isbn13}.title><g:link class="" action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></div>
-						</li>
-<script type="text/javascript">
-DOUBAN.apikey = 
-	DOUBAN.getISBNBook({
-	    isbn:${bookInstance.isbn13},
-	    callback:function(re){
-	        //alert(re.title);
-	        var TitleEle=document.getElementById(re.isbn13+'.title').childNodes;
-	        var	Title=TitleEle[0].innerHTML;
-	        var len=Title.length;
-	        if(len>15){
-	        	var bookTitle = Title.slice(0, 15);
-	        	TitleEle[0].innerHTML=bookTitle+"..."
-	        	//document.getElementById(re.isbn13+'.title').innerHTML="<font size='1' >"+bookTitle+"</font>"
-		        }
-	        //else{
-	       //document.getElementById(re.isbn13+'.title').innerHTML=bookTitle;
-		        //}
-	       document.getElementById(re.isbn13+'.img').innerHTML="<img style=\"margin:0px 0px 0px 9px;width:120px;height:160px; \" src="+re.images.medium+">";
-	       //document.getElementById(re.isbn13+'.title.dialog').innerHTML=Title;
-	       //document.getElementById(re.isbn13+'.img.dialog').innerHTML="<img style=\"height:160px; width:120px;\" src="+re.images.medium+">";
-	       //document.getElementById(re.isbn13+'.author.dialog').innerHTML='作者：'+re.author;
-	       //document.getElementById(re.isbn13+'.publisher.dialog').innerHTML='出版社：'+re.publisher;
-	       //document.getElementById(re.isbn13+'.pubdate.dialog').innerHTML='出版时间：'+re.pubdate;
-	       //document.getElementById(re.isbn13+'.summary').innerHTML=re.summary;
-	    }
-	})
-</script>						
-					</g:each>
-				</ul>
+				<h3>图书搜索</h3></br>
+				<g:remoteLink controller="book" action="findBook" update="divContactList">test</g:remoteLink>
+				<div id="distance">
+					<label>距离：</label>
+					<g:remoteLink controller="book" action="findBook" params="[distance:0]" update="divContactList" style="margin-right: 12px;">全部</g:remoteLink>
+					<g:remoteLink controller="book" action="findBook" params="[distance:1]" update="divContactList" style="margin-right: 12px;">1公里</g:remoteLink>
+					<g:remoteLink controller="book" action="findBook" params="[distance:2]" update="divContactList" style="margin-right: 12px;">2公里</g:remoteLink>
+					<g:remoteLink controller="book" action="findBook" params="[distance:5]" update="divContactList" style="margin-right: 12px;">5公里</g:remoteLink>
+					<g:remoteLink controller="book" action="findBook" params="[distance:10]" update="divContactList" style="margin-right: 12px;">10公里</g:remoteLink>
+				</div>
 			</div>
-<!-- 			<div class="table">
-				<table class="table table-striped">
-				<thead>
-						<tr>
-						
-							<g:sortableColumn property="title" title="${message(code: 'book.title.label', default: 'Title')}" />
-						
-							<g:sortableColumn property="isbn13" title="${message(code: 'book.isbn13.label', default: 'Isbn13')}" />
-						
-							<g:sortableColumn property="author" title="${message(code: 'book.author.label', default: 'Author')}" />
-						
-							<g:sortableColumn property="publisher" title="${message(code: 'book.publisher.label', default: 'Publisher')}" />
-						
-							<g:sortableColumn property="pubdate" title="${message(code: 'book.pubdate.label', default: 'Pubdate')}" />
-						
-							<g:sortableColumn property="summary" title="${message(code: 'book.summary.label', default: 'Summary')}" />
-						
-						</tr>
-					</thead>
-					<tbody>
-					<g:each in="${bookInstanceList}" status="i" var="bookInstance">
-						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						
-							<td><g:link action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></td>
-						
-							<td>${fieldValue(bean: bookInstance, field: "isbn13")}</td>
-						
-							<td>${fieldValue(bean: bookInstance, field: "author")}</td>
-						
-							<td>${fieldValue(bean: bookInstance, field: "publisher")}</td>
-						
-							<td>${fieldValue(bean: bookInstance, field: "pubdate")}</td>
-						
-							<td>${fieldValue(bean: bookInstance, field: "summary")}</td>
-						
-						</tr>
-					</g:each>
-					</tbody>
-				</table>
-			</div>
-				<div class="pagination">
-					<g:paginate total="${booksCount ?: 0}" />
-				</div>-->
-				<g:if test="${(booksCount>params.offset)||(flash.bookTotalTemp!=null)}">
-					<div><a href="/usedlib/book/index?offset=${params.offset}&max=${params.max}" class="prevLink">更多...</a></div>
-				</g:if>
+			<div id="divContactList">	
+				<g:render template="findBook"/>
+			</div>			
 		</div>
 	</body>
 </html>

@@ -34,7 +34,7 @@
 					</g:form>
 				</li>				
 				<shiro:isLoggedIn>
-					<li><a class=""  href="/usedlib/messages/index"><i class="glyphicon glyphicon-envelope"></i> 站内信</a></li>
+					<li><a class=""  href="/usedlib/messages/index"><i class="glyphicon glyphicon-envelope"></i> 站内信<span class="badge">${Messages.countByReceiverAndStatue(session.ShiroUser,true)}</span></a></li>
 					<li class="dropdown">
 						<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  ${session.ShiroUser} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">

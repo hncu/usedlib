@@ -52,7 +52,7 @@ class OwnedBookController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ownedBookInstance.label', default: 'OwnedBook'), ownedBookInstance.id])
-                redirect ownedBookInstance
+                redirect ownedBookInstance.book
             }
             '*' { respond ownedBookInstance, [status: CREATED] }
         }

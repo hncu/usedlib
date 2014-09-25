@@ -9,6 +9,7 @@ class FriendsController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+		params.sort="status"
 		def friendsList
 		def friendsListCount
 		if(SecurityUtils.getSubject().hasRole("ROLE_ADMIN")){
@@ -16,8 +17,8 @@ class FriendsController {
 			friendsListCount=Friends.count
 		}else{
 			def user=ShiroUser.findById(session .ShiroUser?.id)
-			friendsList=Friends.findAllByUser(user,params)
-			friendsListCount=Friends.countByUser(user)
+			friendsList=Friends.findAllByUserOrFriend(user,user,params)
+			friendsListCount=Friends.countByUserOrFriend(user,user)
 		}
         respond friendsList, model:[friendsInstanceCount: friendsListCount]
     }
@@ -41,9 +42,15 @@ class FriendsController {
             respond friendsInstance.errors, view:'create'
             return
         }
+		
+		//only 
+		if(Friends.findByUserAndFriend(friendsInstance.user,friendsInstance.friend) || Friends.findByUserAndFriend(friendsInstance.friend,friendsInstance.user)){
+			println "has one"
+		}else{
+			friendsInstance.save flush:true		
+		}
 
-        friendsInstance.save flush:true
-
+		//todo flash message
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'friendsInstance.label', default: 'Friends'), friendsInstance.id])
@@ -75,7 +82,7 @@ class FriendsController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Friends.label', default: 'Friends'), friendsInstance.id])
-                redirect friendsInstance
+                redirect action:"index", method:"GET"
             }
             '*'{ respond friendsInstance, [status: OK] }
         }
@@ -89,6 +96,10 @@ class FriendsController {
             return
         }
         friendsInstance.delete flush:true
+		
+		def strMessage="${friendsInstance.friend} ${message(code: 'friends.adduser.refuse.label')}"
+		def messagesInstance=new Messages(sender:friendsInstance.friend,receiver:friendsInstance.user,message:strMessage,statue:true)
+		messagesInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

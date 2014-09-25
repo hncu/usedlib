@@ -49,7 +49,16 @@
 						<g:each in="${shiroUserInstance.own}" var="o">
 							<li class="thumbnail col-md-2" style="height:220px;margin: 10px 7px 5px 7px;">
 								<div id=${o.book?.isbn13}.img>${o.book?.isbn13}</div>
-								<div class="col-md-offset-1" id=${o.book?.isbn13}.title><g:link class="" controller="book" action="show" id="${o.book?.id}">${fieldValue(bean: o.book, field: "title")}</g:link></div>
+								<div class="col-md-offset-1" id=${o.book?.isbn13}.title><g:link class="" controller="book" action="show" id="${o.book?.id}">${fieldValue(bean: o.book, field: "title")}</g:link></div><br/>
+			<g:form class="form-horizontal" url="[controller:'borrowedBook',action:'save']" >
+				<g:hiddenField name= "book.id" value =" ${o.book.id}"  />
+                <g:hiddenField name= "borrower.id" value =" ${session.ShiroUser?.id} " />   							
+				<g:hiddenField name= "owner.id" value ="${shiroUserInstance.id}"/>
+				<h3></h3>  
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="col-sm-offset-2 btn btn-primary save" value="借阅此书" />
+				</fieldset>
+			</g:form>				
 							</li>
 <script type="text/javascript">
 DOUBAN.apikey = 

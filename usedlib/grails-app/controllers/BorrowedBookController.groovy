@@ -55,10 +55,9 @@ class BorrowedBookController {
         }
 		borrowedBookInstance.save flush:true
 		
-		def strMessage="${session.ShiroUser}ÏëÒª¸úÄã½èÔÄ${borrowedBookInstance.book}"
-		def messagesInstance=new Messages(sender:session.ShiroUser,receiver:borrowedBookInstance.owner,message:strMessage,borrowedMessage:borrowedBookInstance)
+		def strMessage="${session.ShiroUser} ${message(code: 'borrowedBook.message.label')} ${borrowedBookInstance.book}"
+		def messagesInstance=new Messages(sender:session.ShiroUser,receiver:borrowedBookInstance.owner,message:strMessage,borrowedMessage:borrowedBookInstance,statue:true)
 		messagesInstance.save flush:true
-		println messagesInstance
 
         request.withFormat {
             form multipartForm {

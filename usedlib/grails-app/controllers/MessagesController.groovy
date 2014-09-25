@@ -8,9 +8,19 @@ class MessagesController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	@Transactional
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Messages.list(params), model:[messagesInstanceCount: Messages.count()]
+		//clear the unread messages show
+		def mess=Messages.findAllByReceiverAndStatue(session.ShiroUser,true)
+		mess*.statue=false
+		mess*.save flush:true
+		
+		def messages=Messages.findAllBySenderOrReceiver(session.ShiroUser,session.ShiroUser,params)
+		def messagesCount=Messages.countBySenderOrReceiver(session.ShiroUser,session.ShiroUser)
+		
+        //respond Messages.list(params), model:[messagesInstanceCount: Messages.count()]
+		respond messages, model:[messagesInstanceCount:messagesCount]
     }
 
     def show(Messages messagesInstance) {
@@ -32,7 +42,7 @@ class MessagesController {
             respond messagesInstance.errors, view:'create'
             return
         }
-
+		messagesInstance.statue=true  //unread
         messagesInstance.save flush:true
 
         request.withFormat {
