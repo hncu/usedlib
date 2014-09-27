@@ -27,12 +27,6 @@
 			
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<g:form class=""  style="margin:10px 0px 0px 0px" url="[resource:bookInstance, controller:'book',action:'searchBook']" >
-						<g:textField class="nav navbar-nav navbar-left"name="searchString" required="" value="请输入ISBN号或者书名" onclick="this.value='';focus()"/>
-						<g:submitButton class="nav navbar-nav navbaar-left" name="searchBook" class="" value="搜索"/>
-					</g:form>
-				</li>				
 				<shiro:isLoggedIn>
 					<li><a class=""  href="/usedlib/messages/index"><i class="glyphicon glyphicon-envelope"></i> 站内信<span class="badge">${Messages.countByReceiverAndStatue(session.ShiroUser,true)}</span></a></li>
 					<li class="dropdown">

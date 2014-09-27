@@ -127,18 +127,6 @@ DOUBAN.apikey =
 				</li>
 				</g:if>
 			
-				<g:if test="${bookInstance?.imageUrl}">
-				<li class="fieldcontain">
-					<dl class="dl-horizontal">
-						<dt><span id="imageUrl-label" class="property-label"><g:message code="book.imageUrl.label" default="Image Url" /></span></dt>
-						<dd>
-						
-							<span class="property-value" aria-labelledby="imageUrl-label"><g:fieldValue bean="${bookInstance}" field="imageUrl"/></span>
-						
-						</dd>
-					</dl>
-				</li>
-				</g:if>
 			
 				<g:if test="${bookInstance?.tags}">
 				<li class="fieldcontain">

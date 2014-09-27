@@ -37,6 +37,43 @@ class OwnedBookController {
 
     @Transactional
     def save(OwnedBook ownedBookInstance) {
+		//println "params:${params}"
+		//println "ownedBookInstance:${ownedBookInstance}"
+		//println "ownedBookInstance.book.id:${ownedBookInstance.book.id}"
+		//println "params.book.isbn13:${params.book.isbn13}"
+		
+		if(ownedBookInstance.book.id==null){
+			def booktemp=Book.findByIsbn13(params.book.isbn13)
+			if(booktemp==null){
+				def bookInstance= new Book()
+				bookInstance.subtitle= params.book.subtitle
+				bookInstance.author= params.book.author
+				bookInstance.pubdate= params.book.pubdate
+				bookInstance.tags= params.book.tags
+				//bookInstance.origin_title= params.book.origin_title
+				bookInstance.image= params.book.image
+				bookInstance.binding= params.book.binding
+				bookInstance.translator= params.book.translator
+				bookInstance.catalog= params.book.catalog
+				bookInstance.pages= params.book.pages
+				bookInstance.images= params.book.images
+				bookInstance.doubanid= params.book.id
+				bookInstance.publisher= params.book.publisher
+				bookInstance.isbn10= params.book.isbn10
+				bookInstance.isbn13= params.book.isbn13
+				bookInstance.title= params.book.title
+				bookInstance.url= params.book.url
+				bookInstance.alt_title= params.book.alt_title
+				bookInstance.author_intro= params.book.author_intro
+				bookInstance.summary= params.book.summary
+				bookInstance.price= params.book.price
+				
+				bookInstance.save flush:true
+				ownedBookInstance.book=bookInstance
+			}else{
+				ownedBookInstance.book=booktemp
+			}
+		}
         if (ownedBookInstance == null) {
             notFound()
             return
@@ -52,7 +89,8 @@ class OwnedBookController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ownedBookInstance.label', default: 'OwnedBook'), ownedBookInstance.id])
-                redirect ownedBookInstance.book
+                //redirect ownedBookInstance.book
+				redirect(view: "index", model: [ownedBookInstanceList:OwnedBook,ownedBookInstanceCount: OwnedBook.count()])
             }
             '*' { respond ownedBookInstance, [status: CREATED] }
         }
